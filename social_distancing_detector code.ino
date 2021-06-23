@@ -59,56 +59,54 @@ void loop()
     
 	digitalWrite(triggerPin, LOW);
  	delayMicroseconds(2);
-    //clearing the trigger
+    	//clearing the trigger
   	digitalWrite(triggerPin, HIGH);
   	delayMicroseconds(10);
   	digitalWrite(triggerPin, LOW);
   
-    // capturing the time duration for sound wave to travel in microseconds
+    	// capturing the time duration for sound wave to travel in microseconds
   	duration = pulseIn(echoPin, HIGH);
   	distance = 0.01723 * duration; //formula to calculate distance
   	Serial.print(distance); //print distance
   	Serial.println("cm");
     
-    if  (isHuman == 1 && distance < 200 ){
-    //when distance is less than 200, send a message on LCD 16x2, LED RGB will turn red, buzzer/piezo will sound
+    	if  (isHuman == 1 && distance < 200 ){
+    		//when distance is less than 200, send a message on LCD 16x2, LED RGB will turn red, buzzer/piezo will sound
   
-    //LCD RGB will be red  
-    digitalWrite(rPin, HIGH);
-    digitalWrite(gPin, LOW);
+   		//LCD RGB will be red  
+	   	digitalWrite(rPin, HIGH);
+	    	digitalWrite(gPin, LOW);
     
-    //piezo/buzzer will sound  
-    tone(pinBuzzer,293);
+    		//piezo/buzzer will sound  
+   		tone(pinBuzzer,293);
       
-    //display message on LCD 16x2  
-    lcd.clear();
-    lcd.setCursor(0,0);          
-  	lcd.print("   STAY!!"); 
-  	lcd.setCursor(0,1);           
-  	lcd.print("   AWAY!!");
-      
-    //after 200sec stop buzzer/piezo sound, LCD RGB will be off, LCD 16x2 display will be cleared  
-    delay(200);    
-    noTone(pinBuzzer);
-    digitalWrite(rPin, LOW);
-    lcd.clear();     
+	    	//display message on LCD 16x2  
+	    	lcd.clear();
+	    	lcd.setCursor(0,0);          
+		lcd.print("   STAY!!"); 
+		lcd.setCursor(0,1);           
+		lcd.print("   AWAY!!");
+
+	   	//after 200sec stop buzzer/piezo sound, LCD RGB will be off, LCD 16x2 display will be cleared  
+	   	delay(200);    
+	   	noTone(pinBuzzer);
+	   	digitalWrite(rPin, LOW);
+	    	lcd.clear();     
     
-  }
-  else {
+  	}
+  	else {
   	//if human is present, but distance is more than 200
     
-    //LCD RGB will glow green
-    digitalWrite(rPin, LOW);
-    digitalWrite(gPin, HIGH);
-    
-    //LCD 16x2 will show safe message
-    lcd.setCursor(0,0);          
-  	lcd.print(" You are safe"); 
-  	lcd.setCursor(0,1);           
-  	lcd.print("    ");
-    
-  }
-      
- }
+    		//LCD RGB will glow green
+    		digitalWrite(rPin, LOW);
+	   	digitalWrite(gPin, HIGH);
+
+	    	//LCD 16x2 will show safe message
+	    	lcd.setCursor(0,0);          
+		lcd.print(" You are safe"); 
+		lcd.setCursor(0,1);           
+		lcd.print("    ");
+  	}
+    }
     
 }
